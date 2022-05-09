@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Missions to Mars</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron text-center">
+        <h1>Mission to Mars</h1>
+        <p>Welcome to my web app where you can grab the latest information about the Red Planet!</p>
+        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 border">
+                <h2>Mars Latest News</h2>
+                <hr>
+                <h4>{{ mars_data.news_title }}</h4>
+                <p>{{ mars_data.news_paragraph }}</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-7 col-md-12 border">
+                <h2>Mars Featured Image</h2>
+                <hr>
+                <p>
+                    <img src="{{ mars_data.featured_image_url }}" alt="Mars Featured Image">
+                </p>
+            </div>
+            <div class="col-lg-5 col-md-12 border">
+                <h2>Mars Facts</h2>
+                <hr>
+                <div align="center">
+                    {{ mars_data.fact_table | safe }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Mars Hemisphere Information</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row border">
+            <!-- Loop through each hemisphere dictionary -->
+            {% for hemisphere in mars_data.hemisphere_images %}
+            <div class="col-lg-3 col-md-12 border">
+                <div align="center">
+                    <a href="{{ hemisphere.img_url }}" target="_blank">
+                        <img src="{{ hemisphere.img_url }}" alt="{{ hemisphere.title }}" width="400px">
+                    </a>
+                </div>
+                <div>
+                    <h3>{{ hemisphere.title }}</h3>
+                </div>
+            </div>
+            {% endfor %}
+        </div>  
+  
+    </div>
+
+</body>
+
+</html>
